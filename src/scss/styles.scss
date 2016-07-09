@@ -7,11 +7,10 @@ $orange-border: #f57627;
 	margin: 0; 
 	padding: 0; 
 }
-// #section {
-//     padding-left: 1.25rem;
-//     padding-right: 1.25rem;
-// }
 
+body, p{
+	font-family: 'Slabo 13px', serif;
+}
 #section-testimonial{
 	background: #e5e5e5; 
 	width: 100%; 
@@ -29,8 +28,36 @@ $orange-border: #f57627;
 			padding-left: 1em;
 		}  
 		.testimonial-actual{
-			font-family: Lato, sans-serif;
+			font-family: 'Slabo 13px', serif;
 			padding: 0 0 1em 1em;
+			&:before{
+			    content: '\0022';
+			    color: white;
+			    background: #f57627;
+			    width: 12px;
+			    height: 18px;
+			    position: absolute;
+			    left: -12px;
+			    padding: 0 5px 5px 6px;
+			    border-radius: 12px;
+			    font-size: 35px;
+			    top: -25px;
+			
+			}
+			&:after{
+				content: '';
+			    color: white;
+			    background: #f57627;
+			    /* width: 20px; */
+			    /* height: 20px; */
+			    position: absolute;
+			    left: -5px;
+			    padding: 4px;
+			    border-radius: 12px;
+			    font-size: 9pt;
+			    bottom: -5px;
+			
+			}
 		}
 	}
 }
@@ -52,7 +79,7 @@ $orange-border: #f57627;
 			width: 75%;
 			float: left;
 			color: $plain-white; 
-			font-family: Roboto;
+			font-family: 'Slabo 13px', serif;
 		}
 	}
 }
@@ -93,7 +120,7 @@ $orange-border: #f57627;
 			width: 100%!important;
 			float: left;
 			color: $plain-white; 
-			font-family: Roboto;
+			font-family: Lato, sans-serif;
 			padding: 10px 0;
 		}
 	}
@@ -102,7 +129,7 @@ $orange-border: #f57627;
 	    background: $btn-cta;
 	    border-radius: 5px;
 		padding: 15px 0px;
-	    margin: 0 auto;
+	    margin: 20px auto;
 	    text-decoration: none;
 	    width: 100%;
 	    text-align: center;
@@ -134,8 +161,19 @@ ul{
 		height: 20rem;
 		div{
 			width: 80%;
+			margin: 0 auto;
 		}	
 	}
+
+	ul{
+		flex-wrap: wrap; 
+		li{
+			width: 50%; 
+		}
+	}
+}
+
+@media all and (max-width: 40rem){
 
 	ul{
 		flex-wrap: wrap; 
