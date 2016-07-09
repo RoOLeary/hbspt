@@ -4,6 +4,7 @@ jQuery(document).ready(function(){
   jQuery( 'a#gotchuck' ).on( 'click', function ( e ) {
     e.preventDefault();
     jQuery.ajax( {
+      // Grab a random joke from the Chuck Norris APO
       url: 'https://api.chucknorris.io/jokes/random',
 	  success: function ( data ) {
        jQuery( '.cta-left' ).text( data.value );
@@ -25,7 +26,7 @@ jQuery.ajax({
       jQuery.each(data, function (key, data) {
         //console.log(key); 
         jQuery.each(data, function (index, data) {
-            jQuery('ul').append('<li><img src='+ data.poster + ' /><article><h5 class="title">' + data.title +'<span class="year">('+ data.year +')</span></h5><small>Genre: '+ data.genre +'</small></article></li>')
+            jQuery('ul').append('<li><img src='+ data.poster + ' /><article><h5 class="title">' + data.title +'<span class="year">('+ data.year +')</span></h5><small class="genre">Genre: '+ data.genre +'</small></article></li>')
         }); 
     })
   }});

@@ -46,10 +46,7 @@ body, p{
 			}
 			&:after{
 				content: '';
-			    color: white;
 			    background: #f57627;
-			    /* width: 20px; */
-			    /* height: 20px; */
 			    position: absolute;
 			    left: -5px;
 			    padding: 4px;
@@ -85,7 +82,7 @@ body, p{
 }
 
 .button-right{
-	font-family: Montserrat;
+	font-family: 'Slabo 13px', serif;
 	float: right; 
 	background: $btn-cta;
 	padding: 15px 20px; 
@@ -120,7 +117,7 @@ body, p{
 			width: 100%!important;
 			float: left;
 			color: $plain-white; 
-			font-family: Lato, sans-serif;
+			font-family: 'Slabo 13px', serif;
 			padding: 10px 0;
 		}
 	}
@@ -133,6 +130,7 @@ body, p{
 	    text-decoration: none;
 	    width: 100%;
 	    text-align: center;
+	    
 	}
 }
 
