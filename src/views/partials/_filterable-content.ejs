@@ -1,4 +1,4 @@
-<section>
+<section id="filterable-content">
 	<div>
 		<div>
 			<div>
@@ -12,13 +12,13 @@
 						<div></div>
 					</div>
 					<div>
-						<input type="text">
+						<input type="text" class="search" placeholder="Search" />
 					</div>
 				</div>
 				<div>
 					<div>
-						<input type="radio">
-						<label>Movies</label>
+						<input type="radio" data-sort="year">
+						<label>Year</label>
 					</div>
 					<div>
 						<input type="radio">
@@ -32,11 +32,40 @@
 		</div>
 	</div>
 
-	<div>
+	<div id="movies">
+		 <input class="search" placeholder="Search" />
+		  <button class="sort" data-sort="title">
+		    Sort by name
+		  </button>
+		  <button class="sort" data-sort="year">
+		    Sort by year
+		  </button>
+		  <select class="sort">
+			<option data-sort="genre" genre="">Select</option>
+		  	<option data-sort="genre" genre="action">Action</option>
+		  	<option data-sort="genre" genre="action">Adventure</option>
+		  	<option data-sort="genre" genre="comedy">Comedy</option>
+		  	<option data-sort="genre" genre="crime">Crime</option>
+		  	<option data-sort="genre" genre="dragons">Dragons</option>
+		  	<option data-sort="genre" genre="horror">Horror</option>
+		  	<option data-sort="genre" genre="mystery">Action</option>
+		  	<option data-sort="genre" genre="sci-fi">Sci-Fi</option>
+			<option data-sort="genre" genre="thriller">Thriller</option>
+		  </select>
 		<div>
 			<div>
-				<ul></ul>
+				<ul class="list"></ul>
 			</div>
 		</div>
 	</div>
 </section>
+<script type="text/javascript">
+	
+// For List
+
+var moveiOptions = {
+  valueNames: [ 'title', 'year', 'type', 'genre' ]
+};
+var movieList = new List('movies', moveiOptions);
+
+</script>
