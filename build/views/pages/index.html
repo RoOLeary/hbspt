@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+	
+	<title>HubSpot Technical Test</title>
+	<meta content='width=device-width,initial-scale=1.0' name='viewport'>
+		<!-- 'Montserrat' -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+	<!-- 'Roboto Slab' -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400" rel="stylesheet">
+	<link rel="stylesheet" href="/build/css/styles.css">
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+	<script src="/build/js/index.js"></script>
+	<!-- List script -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+	<link rel='stylesheet' id='font-awesome-css' href='//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css?ver=4.6.1' type='text/css' media='all'/>
+
+<body class="container">
+
+	<div id="section-testimonial">
+	<div>
+		<p class="testimonial-actual">Cake bonbon dessert gummi bears. Gingerbread tart bear claw marshmallow caramels cake croissant. Danish tart bear claw pudding. Brownie marshmallow cake. Gummi bears cotton candy fruitcake apple pie gummi bears jelly sweet sweet. </p>
+		<span>Indiana Jones, Archaeologist</span>
+	</div>
+</div>
+
+	<section id="section-cta">
+	<div class="cta-content">
+		<p class="cta-left">They were just sucked into space. Earl Grey tea, watercress sandwiches. Are you up for promotion? Could someone survive inside a transporter buffer for 75 years? Sure. Shields up! Rrrrred alert! Well, I'll say this for him - he's sure of himself. </p>
+		<a href="#" class="button-right" id="gotchuck">TELL ME MORE</a>
+	</div>
+</section>
+
+
+
+
+	
+	<section id="filterable-content">
+	<div>
+		<div>
+			<div class="filter">
+				<div>
+					<div class="fl-lt">
+						<span>Genre</span>
+						<div></div>
+					</div>
+					<div class="fl-lt">
+						<span>Year</span>
+						<div></div>
+					</div>
+					<div>
+						<input type="text" class="search" placeholder="Search" />
+					</div>
+				</div>
+				<div>
+					<div class="clearboth">
+						<input type="radio" data-sort="type">
+						<label>Movies</label>
+					</div>
+					<div class="clearboth">
+						<input type="radio" data-sort="type">
+						<label>Books</label>
+					</div>
+					<div >
+						<a href="#" id="clear-filter">Clear filters</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="movies">
+		<div>
+			<div>
+				<ul class="list"></ul>
+			</div>
+		</div>
+	</div>
+</section>
+<script type="text/javascript">
+	
+// For List
+
+var moveiOptions = {
+  valueNames: [ 'title', 'year', 'type', 'genre' ]
+};
+var movieList = new List('movies', moveiOptions);
+
+</script>
+    
+</body>
+</html>
+

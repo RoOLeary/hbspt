@@ -26,7 +26,15 @@ jQuery.ajax({
       jQuery.each(data, function (key, data) {
         //console.log(key); 
         jQuery.each(data, function (index, data) {
-            jQuery('ul').append('<li><img src='+ data.poster + ' /><article><h5 class="title">' + data.title +'<span class="year">('+ data.year +')</span></h5><small class="genre">Genre: '+ data.genre +'</small></article></li>')
+            //console.log(data);
+            jQuery('ul').append(
+              jQuery('<li><img src='+ data.poster + ' />').append(
+                jQuery('<article>').append(
+                    jQuery('<h5 class="title">' + data.title +'<span class="year">('+ data.year +')</span></h5><small class="genre">Genre: '+ data.genre +'</small><small class="type">Genre: '+ data.type +'</small>').append()
+        
+            )));
         }); 
     })
   }});
+
+

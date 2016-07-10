@@ -9,8 +9,34 @@ $orange-border: #f57627;
 }
 
 body, p{
-	font-family: 'Slabo 13px', serif;
+	font-family: Montserrat, sans-serif;
 }
+
+.filter{
+	background-color: #fff;
+    box-shadow: 0 0 0 1px rgba(39,41,43,.15),0 1px 2px 0 rgba(0,0,0,.05);
+    margin: 1rem 0;
+    padding: 1em;
+    border-radius: .2857rem;
+    border: none;
+}
+
+.hide{
+	display: none; 
+}
+
+.search{
+	float: right;
+    position: relative;
+    border: 1px solid #e1e1e1;
+}
+
+.fl-lt{
+	float: left; 
+	margin-right: 2em;
+}
+
+
 #section-testimonial{
 	background: #e5e5e5; 
 	width: 100%; 
@@ -28,7 +54,7 @@ body, p{
 			padding-left: 1em;
 		}  
 		.testimonial-actual{
-			font-family: 'Slabo 13px', serif;
+			font-family: Montserrat, sans-serif;
 			padding: 0 0 1em 1em;
 			&:before{
 			    content: '\0022';
@@ -76,13 +102,13 @@ body, p{
 			width: 75%;
 			float: left;
 			color: $plain-white; 
-			font-family: 'Slabo 13px', serif;
+			font-family: Montserrat, sans-serif;
 		}
 	}
 }
 
 .button-right{
-	font-family: 'Slabo 13px', serif;
+	font-family: Montserrat, sans-serif;
 	float: right; 
 	background: $btn-cta;
 	padding: 15px 20px; 
@@ -104,6 +130,11 @@ body, p{
 
 
 @media all and (max-width: 56em){
+#section-testimonial{
+	div {
+	    transform: translateY(10%);
+	}
+}
 #section-cta{
 		height: auto;
 	}
@@ -117,7 +148,7 @@ body, p{
 			width: 100%!important;
 			float: left;
 			color: $plain-white; 
-			font-family: 'Slabo 13px', serif;
+			font-family: Montserrat, sans-serif;
 			padding: 10px 0;
 		}
 	}
@@ -156,7 +187,6 @@ ul{
 
 @media all and (max-width: 50rem){
 	#section-testimonial{
-		height: 20rem;
 		div{
 			width: 80%;
 			margin: 0 auto;
