@@ -65,17 +65,17 @@ body, p{
 			font-family: Montserrat, sans-serif;
 			padding: 0 0 1em 1em;
 			&:before{
-			    content: '\0022';
+		        content: '\“';
 			    color: white;
 			    background: #f57627;
 			    width: 12px;
-			    height: 18px;
+			    height: 17px;
 			    position: absolute;
 			    left: -12px;
-			    padding: 0 5px 5px 6px;
-			    border-radius: 12px;
-			    font-size: 35px;
-			    top: -25px;
+			    padding: 0 5px 5px 4px;
+			    border-radius: 16px;
+			    font-size: 33px;
+			    top: -24px;
 			
 			}
 			&:after{

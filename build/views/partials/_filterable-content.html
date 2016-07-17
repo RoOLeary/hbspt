@@ -1,11 +1,15 @@
 <section id="filterable-content">
 	<div>
 		<div>
-			<div class="filter">
+			<div class="filtr-container">
 				<div>
 					<div class="fl-lt">
 						<span>Genre</span>
-						<div></div>
+						<select>
+							<option data-filter="horror">Horror</option
+						</select>
+						
+
 					</div>
 					<div class="fl-lt">
 						<span>Year</span>
@@ -35,18 +39,15 @@
 	<div id="movies">
 		<div>
 			<div>
-				<ul class="list"></ul>
+				<ul class="simplefilter"></ul>
 			</div>
 		</div>
 	</div>
 </section>
 <script type="text/javascript">
-	
-// For List
-
-var moveiOptions = {
-  valueNames: [ 'title', 'year', 'type', 'genre' ]
-};
-var movieList = new List('movies', moveiOptions);
-
+// ToDo: Integrate Sortability. Should've gone with react.
+// var moveiOptions = {
+//   valueNames: [ 'title', 'year', 'type', 'genre' ]
+// };
+// var movieList = new List('movies', moveiOptions);
 </script>
