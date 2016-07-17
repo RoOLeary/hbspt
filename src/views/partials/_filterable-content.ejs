@@ -1,9 +1,7 @@
 <section id="filterable-content"></section>
 <script type="text/babel">
 // load in JSON data from file
-
 var data;
-
 // grab the actual data 
 var oReq = new XMLHttpRequest();
 oReq.onload = reqListener;
@@ -14,24 +12,24 @@ oReq.send();
 
 function reqListener(e) {
     data = JSON.parse(this.responseText);
-    console.log(data.media[1].title);
+    //console.log(data.media[1].title);
     
     var list = document.getElementById('list');
     var genreList = document.getElementById('Genre');
     var yearList = document.getElementById('Year');
-    
-
+   
     var i = 0;
     //console.log(data);
 	for (i = 0; i < data.media.length; i++) {
 		var obj = data.media[i];
-		console.log(obj.title + ' ' + obj.poster + ' ' + obj.genre);
+
+	
+		//console.log(obj.title + ' ' + obj.poster + ' ' + obj.genre);
 		list.innerHTML += '<li><img src="' + obj.poster +'"></li>';
 		genreList.innerHTML += '<option value="'+ obj.genre +'">' + obj.genre + '</option>'; 
 		yearList.innerHTML += '<option value="'+ obj.year +'">' + obj.year + '</option>';   	
 	
 	}
-
 
 }
 // Master Component
@@ -45,8 +43,8 @@ var MovieList = React.createClass({
       			<div className="filter">
         			<DropDownFilters />
         		</div>
-        		<Movie />
 
+        		<Movie />
      		</div>
      </div>
     );
@@ -74,6 +72,29 @@ var DropDownFilters = React.createClass({
 
 var GenreList = React.createClass({
 	
+	getInitialState: function () {
+        return {
+            options: []
+        };
+    },
+    componentDidMount: function () {
+
+        var component = this;
+
+        $.ajax({
+            url: '../src/js/data/data.json',
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (data) {
+            	console.log('GENRE' + data);
+                component.setState({
+                    options: data
+
+                });
+            }
+        });
+    },
+
 	render: function(){
 		return(
 			<div className="fl-lt">
