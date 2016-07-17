@@ -1,18 +1,24 @@
 <section id="filterable-content">
 	<div>
 		<div>
-			<div class="filtr-container">
+			<div class="filter">
 				<div>
 					<div class="fl-lt">
-						<span>Genre</span>
-						<select>
-							<option data-filter="horror">Horror</option
+						<select id="Genre">
+							<option value="">GENRE</option>
+							<option value="">ACTION</option>
+							<option value="">ADVENTURE</option>
+							<option value="">HORROE</option>
 						</select>
-						
-
+						<div></div>
 					</div>
 					<div class="fl-lt">
-						<span>Year</span>
+						<select id="Year">
+							<option value="">2016</option>
+							<option value="">2015</option>
+							<option value="">2014</option>
+							<option value="">2013</option>
+						</select>
 						<div></div>
 					</div>
 					<div>
@@ -20,15 +26,15 @@
 					</div>
 				</div>
 				<div>
-					<div class="mvis">
+					<!-- <div class="mvis">
 						<input type="checkbox" data-sort="type">
 						<label>Movies</label>
 					</div>
 					<div class="books">
 						<input type="checkbox" data-sort="type">
 						<label>Books</label>
-					</div>
-					<div style="float: right"; >
+					</div> -->
+					<div style="clear: both; float: right"; >
 						<a href="#" id="clear-filter">Clear filters</a>
 					</div>
 				</div>
@@ -37,9 +43,9 @@
 	</div>
 
 	<div id="movies">
-		<div>
+		<div id="bgfied">
 			<div>
-				<ul class="simplefilter"></ul>
+				<ul class="list"></ul>
 			</div>
 		</div>
 	</div>
