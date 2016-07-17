@@ -35,8 +35,8 @@ function reqListener(e) {
 // Master Component
 
 var MovieList = React.createClass({
-
   render: function() {
+  	//console.log(data);
 	return (
       <div>
       		<div>
@@ -72,29 +72,6 @@ var DropDownFilters = React.createClass({
 
 var GenreList = React.createClass({
 	
-	getInitialState: function () {
-        return {
-            options: []
-        };
-    },
-    componentDidMount: function () {
-
-        var component = this;
-
-        $.ajax({
-            url: '../src/js/data/data.json',
-            type: 'GET',
-            dataType: 'JSON',
-            success: function (data) {
-            	console.log('GENRE' + data);
-                component.setState({
-                    options: data
-
-                });
-            }
-        });
-    },
-
 	render: function(){
 		return(
 			<div className="fl-lt">
@@ -183,5 +160,5 @@ ReactDOM.render(
     <MovieList />,
     document.getElementById('filterable-content')
  );
-  // ** Your code goes here! **
+
 </script>
