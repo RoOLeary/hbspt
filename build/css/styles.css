@@ -14,6 +14,10 @@ body, p {
   border-radius: .2857rem;
   border: none; }
 
+.clear-filter {
+  clear: both;
+  float: right; }
+
 .hide {
   display: none; }
 
@@ -104,7 +108,7 @@ body, p {
 .button-right:hover {
   background: lightblue; }
 
-#filterable-content > div, #movies {
+#filterable-content {
   margin: 0 auto;
   width: 80%; }
 

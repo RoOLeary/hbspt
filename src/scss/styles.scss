@@ -21,6 +21,11 @@ body, p{
     border: none;
 }
 
+.clear-filter{
+	clear: both; 
+	float: right; 
+}
+
 .hide{
 	display: none; 
 }
@@ -131,7 +136,7 @@ body, p{
 }
 
 
-#filterable-content > div, #movies{
+#filterable-content{
 	margin: 0 auto;
     width: 80%;
 }

@@ -1,59 +1,166 @@
-<section id="filterable-content">
-	<div>
-		<div>
-			<div class="filter">
-				<div>
-					<div class="fl-lt">
-						<select id="Genre">
-							<option value="">GENRE</option>
-							<option value="">ACTION</option>
-							<option value="">ADVENTURE</option>
-							<option value="">HORROE</option>
-						</select>
-						<div></div>
-					</div>
-					<div class="fl-lt">
-						<select id="Year">
-							<option value="">2016</option>
-							<option value="">2015</option>
-							<option value="">2014</option>
-							<option value="">2013</option>
-						</select>
-						<div></div>
-					</div>
-					<div>
-						<input type="text" class="search" placeholder="Search" />
-					</div>
-				</div>
-				<div>
-					<!-- <div class="mvis">
-						<input type="checkbox" data-sort="type">
-						<label>Movies</label>
-					</div>
-					<div class="books">
-						<input type="checkbox" data-sort="type">
-						<label>Books</label>
-					</div> -->
-					<div style="clear: both; float: right"; >
-						<a href="#" id="clear-filter">Clear filters</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<section id="filterable-content"></section>
+<script type="text/babel">
+// load in JSON data from file
 
-	<div id="movies">
-		<div id="bgfied">
+var data;
+
+// grab the actual data 
+var oReq = new XMLHttpRequest();
+oReq.onload = reqListener;
+oReq.open("get", "../src/js/data/data.json", true);
+oReq.send();
+
+// right, should be able to do some stuff now.
+
+function reqListener(e) {
+    data = JSON.parse(this.responseText);
+    console.log(data.media[1].title);
+    
+    var list = document.getElementById('list');
+    var genreList = document.getElementById('Genre');
+    var yearList = document.getElementById('Year');
+    
+
+    var i = 0;
+    //console.log(data);
+	for (i = 0; i < data.media.length; i++) {
+		var obj = data.media[i];
+		console.log(obj.title + ' ' + obj.poster + ' ' + obj.genre);
+		list.innerHTML += '<li><img src="' + obj.poster +'"></li>';
+		genreList.innerHTML += '<option value="'+ obj.genre +'">' + obj.genre + '</option>'; 
+		yearList.innerHTML += '<option value="'+ obj.year +'">' + obj.year + '</option>';   	
+	
+	}
+
+
+}
+// Master Component
+
+var MovieList = React.createClass({
+
+  render: function() {
+	return (
+      <div>
+      		<div>
+      			<div className="filter">
+        			<DropDownFilters />
+        		</div>
+        		<Movie />
+
+     		</div>
+     </div>
+    );
+  }
+});
+
+
+// Dropdown Filters (pass in components you're rendering for the GenreList, YearList and SearchBox. Also ClearFilter, but may break that out. We'll see. )
+
+var DropDownFilters = React.createClass({
+	render: function(){
+		return (
 			<div>
-				<ul class="list"></ul>
+				<GenreList />
+				<YearList />
+				<SearchBox />
+				<ClearFilter />
 			</div>
+		);
+	}
+});
+
+// Render the component for the dropdown list
+// TO DO: Dynamically populate the options list and output
+
+var GenreList = React.createClass({
+	
+	render: function(){
+		return(
+			<div className="fl-lt">
+					<select id="Genre"></select>
+					<div></div>
+				</div>
+
+		)
+	}
+});
+
+// Render the component for the Year dropdown list
+// TO DO: Dynamically populate the options list and output
+
+var YearList = React.createClass({
+	render: function(){
+		return(
+		<div className="fl-lt">
+			<select id="Year">
+				<option value="">2016</option>
+				<option value="">2015</option>
+				<option value="">2014</option>
+				<option value="">2013</option>
+			</select>
+			<div></div>
 		</div>
+		)
+	}
+});
+
+// Component to render the search box field
+
+var SearchBox = React.createClass({
+	render: function() {
+    return (
+      <div>
+		<input type="text" className="search" placeholder="Search" />
 	</div>
-</section>
-<script type="text/javascript">
-// ToDo: Integrate Sortability. Should've gone with react.
-// var moveiOptions = {
-//   valueNames: [ 'title', 'year', 'type', 'genre' ]
-// };
-// var movieList = new List('movies', moveiOptions);
+    );
+  }
+});
+
+// Component to render the clear filters field
+
+var ClearFilter = React.createClass({
+	render: function(){
+		return(
+			<div>
+				<div className="mvis">
+					<input type="checkbox" data-sort="type" />
+					<label>Movies</label>
+				</div>
+				<div className="books">
+					<input type="checkbox" data-sort="type" />
+					<label>Books</label>
+				</div>
+				<div className="clear-filter">
+					<a href="#" id="clear-filter">Clear filters</a>
+				</div>
+			</div>
+		)
+	}
+});
+
+// Right, on to the actual element. So we're going to render the movies into the ul and then once there's some output we'll hook it up. 
+
+var Movie = React.createClass({
+
+	render: function(){
+		return(
+		<div>
+			<div id="movies">
+				<div>
+					<ul id="list"></ul>
+				</div>
+			</div> 
+		</div>
+		)
+	}
+});
+
+
+// Render the MovieList Component to the filterable-content section
+
+ReactDOM.render(
+    <MovieList />,
+    document.getElementById('filterable-content')
+ );
+  // ** Your code goes here! **
 </script>
