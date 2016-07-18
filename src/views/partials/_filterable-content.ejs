@@ -1,118 +1,8 @@
 <section id="filterable-content"></section>
 
 <script type="text/babel">
-// load in JSON data from file
-
-// Master Component
-
-var MovieList = React.createClass({
-	getDefaultProps: function() {
-	    return {
-	      value: 'default value'
-	    };
-  },
-  componentDidMount: function(){
-  		var data;
-		var oReq = new XMLHttpRequest();
-		oReq.onload = loadData;
-		oReq.open("get", "../src/js/data/data.json", true);
-		oReq.send();
-		// right, should be able to do some stuff now.
-		function loadData(e) {
-		    data = JSON.parse(this.responseText);
-		    console.log(data);
-		    var list = document.getElementById('list');
-		    
-		    var i = 0;
-			for (i = 0; i < data.media.length; i++) {
-				var obj = data.media[i];
-
-				list.innerHTML += '<li><img src="' + obj.poster +'"><br><p>'+ obj.title +'</p><br><p>Genre: '+ obj.genre +'</p></li>';
-			}
-
-		}
-
-  }, 
-   
-  render: function() {
-  	console.log(this.props.value);
-	return (
-      <div>
-      		<div>
-      			<div className="filter">
-        			<DropDownFilters />
-        		</div>
-        		<Movie />
-     		</div>
-     </div>
-    );
-  }
-});
-
-
-// Dropdown Filters (pass in components you're rendering for the GenreList, YearList and SearchBox. Also ClearFilter, but may break that out. We'll see. )
-
-var DropDownFilters = React.createClass({
-
-	render: function(){
-		//console.log(this.props.value);
-		return (
-			<div>
-				<GenreList />
-				<YearList />
-				<SearchBox />
-				<ClearFilter />
-			</div>
-		);
-	}
-});
-
-// Render the component for the dropdown list
-// TO DO: Dynamically populate the options list and output
-
-var GenreList = React.createClass({
-	
-	render: function(){
-		return(
-			<div className="fl-lt">
-				<select id="Genre">
-				</select>
-				<div></div>
-			</div>
-		)
-	}
-});
-
-// Render the component for the Year dropdown list
-// TO DO: Dynamically populate the options list and output
-
-var YearList = React.createClass({
-	render: function(){
-		return(
-		<div className="fl-lt">
-			<select id="Year">
-				<option value="{this.props.value}">{this.props.value}</option>
-				
-			</select>
-			<div></div>
-		</div>
-		)
-	}
-});
-
-// Component to render the search box field
-
-var SearchBox = React.createClass({
-	render: function() {
-    return (
-      <div>
-		<input type="text" className="search" placeholder="Search" />
-	</div>
-    );
-  }
-});
-
 // Component to render the clear filters field
+// To DO: clear fields on click, maybe refresh page. 
 
 var ClearFilter = React.createClass({
 	render: function(){
@@ -134,7 +24,92 @@ var ClearFilter = React.createClass({
 	}
 });
 
+// Component to render the search box field
+// ToDO: MOst of it. 
+
+var SearchBox = React.createClass({
+	render: function() {
+    return (
+      <div>
+		<input type="text" className="search" placeholder="Search" />
+	</div>
+    );
+  }
+});
+
+
+// Render the component for the Year dropdown list
+// TO DO: Dynamically populate the options list and output
+
+var YearList = React.createClass({
+	render: function(){
+		return(
+		<div className="fl-lt">
+			<select id="Year">
+				<option value="" default>YEARS</option>
+				<option value="2016">2016</option>
+				<option value="2012">2012</option>
+				<option value="1989">1989</option>
+				<option value="1973">1973</option>
+				<option value="1945">1945</option>
+			</select>
+			<div></div>
+		</div>
+		)
+	}
+});
+
+
+// Render the component for the Genre dropdown list
+// TO DO: Dynamically populate the options list and output
+
+var GenreList = React.createClass({
+	
+	render: function(){
+		return(
+			<div className="fl-lt">
+				<select id="Genre">
+				</select>
+				<div></div>
+			</div>
+		)
+	}
+});
+
+
+// Dropdown Filters (pass in components we're rendering for the GenreList, YearList and SearchBox. Also ClearFilter, but may break that out. We'll see. It's late and I can barely see straight. )
+
+var DropDownFilters = React.createClass({
+
+	render: function(){
+		//console.log(this.props.value);
+		return (
+			<div>
+				<GenreList />
+				<YearList />
+				<SearchBox />
+				<ClearFilter />
+			</div>
+		);
+	}
+});
 // Right, on to the actual element. So we're going to render the movies into the ul and then once there's some output we'll hook it up. 
+
+
+
+
+var MovieItem = React.createClass({
+
+	render: function(){
+		return(
+			<li>
+				<img src="" />
+				<p>Title</p>
+				<p>Genre: {this.props.type}</p>
+			</li>
+			)
+	}
+}); 
 
 var Movie = React.createClass({
 
@@ -143,7 +118,9 @@ var Movie = React.createClass({
 		<div>
 			<div id="movies">
 				<div>
-					<ul id="list"></ul>
+					<ul id="list">
+						<MovieItem />
+					</ul>
 				</div>
 			</div> 
 		</div>
@@ -151,11 +128,62 @@ var Movie = React.createClass({
 	}
 });
 
-
 // Render the MovieList Component to the filterable-content section
+// Okay, Parent Component
+// load in JSON data from file (set URL on the output component so I can use it again as this.props/url)
+// probably betrer to pass values for lists and stuff as state rather than props. Bit more reading. 
+
+var MovieList = React.createClass({
+  loadMoviesFromJson: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+        
+        // spit this out in the console to see what the craic is. 
+        console.log(data);
+        // grand - is logging the object. 
+
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },	
+
+  getInitialState: function() {
+    // pass in an empty array so that this returns true/doesn't throw an error. 
+    return {data: []}; 
+  },
+
+  componentDidMount: function(){
+  	// fire up the function to load in the json. 
+	this.loadMoviesFromJson();
+  }, 
+   
+  render: function() {
+  	  // var obj = this.state.data.media.map(function(obj) {
+  	  // 	return <div>{obj}</div>;
+     //  });
+    
+	return (
+  	
+      <div>
+      		<div>
+      			<div className="filter">
+        			<DropDownFilters />
+        		</div>
+        		<Movie />
+     		</div>
+     </div>
+    );
+  }
+});
 
 ReactDOM.render(
-    <MovieList />,
+    <MovieList url='../src/js/data/data.json'/>,
     document.getElementById('filterable-content')
  );
 
