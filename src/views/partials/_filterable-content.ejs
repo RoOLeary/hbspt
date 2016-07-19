@@ -3,8 +3,7 @@
 <script type="text/babel">
 
 // Component to render the clear filters field
-// To DO: clear fields on click, maybe refresh page. 
-
+// To DO: clear fields on click,
 var ClearFilter = React.createClass({
 	render: function(){
 		return(
@@ -21,12 +20,14 @@ var CheckBoxes = React.createClass({
 
 	mvisChange: function(){
 		console.log('mvis checkbox has been ticked');
-		// To Do: add the filter/change events. Waaaay ahead of that though. 
+		// To Do: add the filter/change events. Waaaay ahead of that though.
+		// Use boxes to alter state, how we'll eventually initiate the filtering 
 	},
 
 	booksChange: function(){
 		console.log('book checkbox has been ticked');
 		// To Do: add the filter/change events. Waaaay ahead of that though. 
+		// mar thuas. 
 	},
 
 	render: function(){
@@ -67,7 +68,7 @@ var YearList = React.createClass({
 	render: function(){
 		return(
 		<div className="fl-lt">
-			<select id="Year">
+			<select id="Year" multiple>
 				<option value="" default>YEARS</option>
 				<option value="2016">2016</option>
 				<option value="2012">2012</option>
