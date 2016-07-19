@@ -129,18 +129,17 @@ var MovieItem = React.createClass({
 	render: function(){
 		var movieItems = this.props.data.map(function (data) {
             return (
-                <div key={data.title}>
+                <li>
 	            	<img src={data.poster} />
-					<p>{data.title}</p>
+					<p>{data.title} ({data.year})</p>
 					<p>Genre: {data.genre}</p>
-				
-				</div>
+				</li>
             );
         });
 			return(
-				<li>
+				<div>
 		    		{movieItems}
-				</li>
+				</div>
 			)
 		}
 	}); 
@@ -173,14 +172,7 @@ var MovieList = React.createClass({
 	      dataType: 'json',
 	      success: function(data) {
 	        this.setState({data: data.media});
-	      	
 	      	console.log(this.state.data);	        
-
-			//  for(var i = 0; i <= data.media.length; i++){
-			//  var objtitle = this.state.data[i].title;
-			//  var objyear = this.state.data[i].year;
-			// 	console.log(objtitle + ' - ' + objyear);
-			// }
 	        // grand - is logging the object, seems to be correct. Fire ahead so... 
 	      }.bind(this),
 	      error: function(xhr, status, err) {
