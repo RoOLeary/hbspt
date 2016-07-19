@@ -1,6 +1,7 @@
 <section id="filterable-content"></section>
 
 <script type="text/babel">
+
 // Component to render the clear filters field
 // To DO: clear fields on click, maybe refresh page. 
 
@@ -8,6 +9,19 @@ var ClearFilter = React.createClass({
 	render: function(){
 		return(
 			<div>
+				<div className="clear-filter">
+					<a href="#" id="clear-filter">Clear filters</a>
+				</div>
+			</div>
+		)
+	}
+});
+
+var CheckBoxes = React.createClass({
+	render: function(){
+		return(
+			<div>
+
 				<div className="mvis">
 					<input type="checkbox" data-sort="type" />
 					<label>Movies</label>
@@ -16,13 +30,10 @@ var ClearFilter = React.createClass({
 					<input type="checkbox" data-sort="type" />
 					<label>Books</label>
 				</div>
-				<div className="clear-filter">
-					<a href="#" id="clear-filter">Clear filters</a>
-				</div>
 			</div>
 		)
 	}
-});
+}); 
 
 // Component to render the search box field
 // ToDO: MOst of it. 
@@ -40,6 +51,7 @@ var SearchBox = React.createClass({
 
 // Render the component for the Year dropdown list
 // TO DO: Dynamically populate the options list and output
+
 
 var YearList = React.createClass({
 	render: function(){
@@ -82,44 +94,54 @@ var GenreList = React.createClass({
 var DropDownFilters = React.createClass({
 
 	render: function(){
-		//console.log(this.props.value);
 		return (
 			<div>
 				<GenreList />
 				<YearList />
 				<SearchBox />
+				<CheckBoxes />
 				<ClearFilter />
+
 			</div>
 		);
 	}
 });
+
 // Right, on to the actual element. So we're going to render the movies into the ul and then once there's some output we'll hook it up. 
-
-
-
 
 var MovieItem = React.createClass({
 
+	linkOnClick: function(){
+		// ToDo: stop it returning undefined. 
+		console.log('Test'); 
+		console.log(this.props.children);
+	}, 
 	render: function(){
+
+	
 		return(
 			<li>
-				<img src="" />
-				<p>Title</p>
-				<p>Genre: {this.props.type}</p>
+	            
+	            <div>
+	            	<img src="" />
+					<p>{this.props.title}</p>
+					<p>Genre: {this.props.genre}, Type: {this.props.type}</p>
+					<a onClick={this.linkOnClick}>Click</a>
+				</div>
+				
 			</li>
-			)
+		)
 	}
 }); 
 
-var Movie = React.createClass({
-
+var MovieOutput = React.createClass({
 	render: function(){
 		return(
 		<div>
 			<div id="movies">
 				<div>
 					<ul id="list">
-						<MovieItem />
+						<MovieItem title="foo" genre="Horror, Comedy, Satirical" type="movie"/>
 					</ul>
 				</div>
 			</div> 
@@ -129,61 +151,67 @@ var Movie = React.createClass({
 });
 
 // Render the MovieList Component to the filterable-content section
-// Okay, Parent Component
 // load in JSON data from file (set URL on the output component so I can use it again as this.props/url)
-// probably betrer to pass values for lists and stuff as state rather than props. Bit more reading. 
+// probably betrer to pass values for lists and stuff as props. Bit more reading. 
 
 var MovieList = React.createClass({
-  loadMoviesFromJson: function() {
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        this.setState({data: data});
-        
-        // spit this out in the console to see what the craic is. 
-        console.log(data);
-        // grand - is logging the object. 
 
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
-  },	
+	loadMoviesFromJson: function() {
+	    $.ajax({
+	      url: this.props.url,
+	      dataType: 'json',
+	      cache: false,
+	      success: function(data) {
 
-  getInitialState: function() {
-    // pass in an empty array so that this returns true/doesn't throw an error. 
-    return {data: []}; 
-  },
+	        this.setState({data: data.media});
+	      	console.log(data.media);	        
+	        var i = '';
+	        for(i = 0; i <= data.media.length; i++){
+	        	var objtitle = this.state.data[i].title;
+	        	console.log(objtitle);
+			}
+	        // grand - is logging the object, seems to be correct. Fire ahead so... 
+	      }.bind(this),
+	      error: function(xhr, status, err) {
+	        console.error(this.props.url, status, err.toString());
+	      }.bind(this)
+	    });
+	},	
 
-  componentDidMount: function(){
-  	// fire up the function to load in the json. 
-	this.loadMoviesFromJson();
-  }, 
+	getInitialState: function() {
+	    // pass in an empty array so that this returns true/doesn't throw an error. 
+	    //console.log(data);
+	    console.log("initial state");
+	    return {data: []}; 
+	   	
+	},
+
+    componentDidMount: function(){
+	  	// fire up the function to load in the json. 
+		this.loadMoviesFromJson();
+  	}, 
    
-  render: function() {
-  	  // var obj = this.state.data.media.map(function(obj) {
-  	  // 	return <div>{obj}</div>;
-     //  });
-    
-	return (
-  	
-      <div>
-      		<div>
-      			<div className="filter">
-        			<DropDownFilters />
-        		</div>
-        		<Movie />
-     		</div>
-     </div>
-    );
-  }
-});
+	render: function() {    
+		//console.log(data.media[2].title);	
+		return (
+	  	
+	      <div>
+	      		<div>
+	      			<div className="filter">
+	        			<DropDownFilters />
+	        		</div>
+	        		<p>{this.state.data.length} - {this.state.data.title}</p>
+	        		<MovieOutput/>
+	        		
+	     		</div>
+	     </div>
+	    );
+	  }
+	});
 
+// Render the actual component
 ReactDOM.render(
-    <MovieList url='../src/js/data/data.json'/>,
+    <MovieList url='../src/js/data/data.json' data="{data}"/>,
     document.getElementById('filterable-content')
  );
 
