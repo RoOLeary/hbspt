@@ -18,16 +18,21 @@ var ClearFilter = React.createClass({
 });
 
 var CheckBoxes = React.createClass({
+
+	handleChange: function(){
+		console.log('one or both of the checkboxes have been ticked');
+		// To Do: add the filter/change events. Waaaay ahead of that though. 
+	},
+
 	render: function(){
 		return(
 			<div>
-
 				<div className="mvis">
-					<input type="checkbox" data-sort="type" />
+					<input type="checkbox" onChange={this.handleChange}/>
 					<label>Movies</label>
 				</div>
 				<div className="books">
-					<input type="checkbox" data-sort="type" />
+					<input type="checkbox" onChange={this.handleChange}/>
 					<label>Books</label>
 				</div>
 			</div>
@@ -41,7 +46,7 @@ var CheckBoxes = React.createClass({
 var SearchBox = React.createClass({
 	render: function() {
     return (
-      <div>
+  	<div>
 		<input type="text" className="search" placeholder="Search" />
 	</div>
     );
@@ -114,18 +119,16 @@ var MovieItem = React.createClass({
 	linkOnClick: function(){
 		// ToDo: stop it returning undefined. 
 		console.log('Test'); 
-		console.log(this.props.children);
 	}, 
 	render: function(){
-
 	
 		return(
 			<li>
 	            
 	            <div>
-	            	<img src="" />
+	            	<img src={this.props.poster} />
 					<p>{this.props.title}</p>
-					<p>Genre: {this.props.genre}, Type: {this.props.type}</p>
+					<p>Genre: {this.props.genre}</p>
 					<a onClick={this.linkOnClick}>Click</a>
 				</div>
 				
@@ -141,7 +144,7 @@ var MovieOutput = React.createClass({
 			<div id="movies">
 				<div>
 					<ul id="list">
-						<MovieItem title="foo" genre="Horror, Comedy, Satirical" type="movie"/>
+						<MovieItem title="The Revenant" genre="Horror, Comedy, Satirical" type="movie" poster="http://fillmurray.com/100/100"/>
 					</ul>
 				</div>
 			</div> 
