@@ -19,8 +19,13 @@ var ClearFilter = React.createClass({
 
 var CheckBoxes = React.createClass({
 
-	handleChange: function(){
-		console.log('one or both of the checkboxes have been ticked');
+	mvisChange: function(){
+		console.log('mvis checkbox has been ticked');
+		// To Do: add the filter/change events. Waaaay ahead of that though. 
+	},
+
+	booksChange: function(){
+		console.log('book checkbox has been ticked');
 		// To Do: add the filter/change events. Waaaay ahead of that though. 
 	},
 
@@ -28,11 +33,11 @@ var CheckBoxes = React.createClass({
 		return(
 			<div>
 				<div className="mvis">
-					<input type="checkbox" onChange={this.handleChange}/>
+					<input type="checkbox" onChange={this.mvisChange}/>
 					<label>Movies</label>
 				</div>
 				<div className="books">
-					<input type="checkbox" onChange={this.handleChange}/>
+					<input type="checkbox" onChange={this.booksChange}/>
 					<label>Books</label>
 				</div>
 			</div>
@@ -44,13 +49,13 @@ var CheckBoxes = React.createClass({
 // ToDO: MOst of it. 
 
 var SearchBox = React.createClass({
-	render: function() {
-    return (
-  	<div>
-		<input type="text" className="search" placeholder="Search" />
-	</div>
-    );
-  }
+		render: function() {
+		    return (
+		  	<div>
+				<input type="text" className="search" placeholder="Search" />
+			</div>
+		    );
+		  }
 });
 
 
@@ -112,19 +117,18 @@ var DropDownFilters = React.createClass({
 	}
 });
 
-// Right, on to the actual element. So we're going to render the movies into the ul and then once there's some output we'll hook it up. 
+// Right, on to the actual element. So we're going to render the movies into the ul and then once (read as - if) there's some output we'll wire it up. 
 
 var MovieItem = React.createClass({
 
 	linkOnClick: function(){
-		// ToDo: stop it returning undefined. 
-		console.log('Test'); 
+		// ToDo: Something useful. 
+		console.log(data); 
 	}, 
+
 	render: function(){
-	
 		return(
 			<li>
-	            
 	            <div>
 	            	<img src={this.props.poster} />
 					<p>{this.props.title}</p>
@@ -163,15 +167,15 @@ var MovieList = React.createClass({
 	    $.ajax({
 	      url: this.props.url,
 	      dataType: 'json',
-	      cache: false,
 	      success: function(data) {
-
 	        this.setState({data: data.media});
-	      	console.log(data.media);	        
-	        var i = '';
-	        for(i = 0; i <= data.media.length; i++){
+	      	
+	      	console.log(this.state.data);	        
+
+	        for(var i = 0; i <= data.media.length; i++){
 	        	var objtitle = this.state.data[i].title;
-	        	console.log(objtitle);
+	        	var objyear = this.state.data[i].year;
+				console.log(objtitle + ' - ' + objyear);
 			}
 	        // grand - is logging the object, seems to be correct. Fire ahead so... 
 	      }.bind(this),
@@ -195,7 +199,7 @@ var MovieList = React.createClass({
   	}, 
    
 	render: function() {    
-		//console.log(data.media[2].title);	
+		
 		return (
 	  	
 	      <div>
@@ -203,7 +207,8 @@ var MovieList = React.createClass({
 	      			<div className="filter">
 	        			<DropDownFilters />
 	        		</div>
-	        		<p>{this.state.data.length} - {this.state.data.title}</p>
+	        		<p>There are {this.state.data.length} array items.</p>
+	        		
 	        		<MovieOutput/>
 	        		
 	     		</div>
@@ -214,7 +219,7 @@ var MovieList = React.createClass({
 
 // Render the actual component
 ReactDOM.render(
-    <MovieList url='../src/js/data/data.json' data="{data}"/>,
+    <MovieList url='../src/js/data/data.json'/>,
     document.getElementById('filterable-content')
  );
 
