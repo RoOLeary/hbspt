@@ -123,23 +123,27 @@ var MovieItem = React.createClass({
 
 	linkOnClick: function(){
 		// ToDo: Something useful. 
-		console.log(data); 
+		console.log(this.props.data); 
 	}, 
 
 	render: function(){
-		return(
-			<li>
-	            <div>
-	            	<img src={this.props.poster} />
-					<p>{this.props.title}</p>
-					<p>Genre: {this.props.genre}</p>
-					<a onClick={this.linkOnClick}>Click</a>
-				</div>
+		var movieItems = this.props.data.map(function (data) {
+            return (
+                <div key={data.title}>
+	            	<img src={data.poster} />
+					<p>{data.title}</p>
+					<p>Genre: {data.genre}</p>
 				
-			</li>
-		)
-	}
-}); 
+				</div>
+            );
+        });
+			return(
+				<li>
+		    		{movieItems}
+				</li>
+			)
+		}
+	}); 
 
 var MovieOutput = React.createClass({
 	render: function(){
@@ -148,7 +152,7 @@ var MovieOutput = React.createClass({
 			<div id="movies">
 				<div>
 					<ul id="list">
-						<MovieItem title="The Revenant" genre="Horror, Comedy, Satirical" type="movie" poster="http://fillmurray.com/100/100"/>
+						<MovieItem data={this.props.data}/>
 					</ul>
 				</div>
 			</div> 
@@ -172,11 +176,11 @@ var MovieList = React.createClass({
 	      	
 	      	console.log(this.state.data);	        
 
-	        for(var i = 0; i <= data.media.length; i++){
-	        	var objtitle = this.state.data[i].title;
-	        	var objyear = this.state.data[i].year;
-				console.log(objtitle + ' - ' + objyear);
-			}
+			//  for(var i = 0; i <= data.media.length; i++){
+			//  var objtitle = this.state.data[i].title;
+			//  var objyear = this.state.data[i].year;
+			// 	console.log(objtitle + ' - ' + objyear);
+			// }
 	        // grand - is logging the object, seems to be correct. Fire ahead so... 
 	      }.bind(this),
 	      error: function(xhr, status, err) {
@@ -208,8 +212,8 @@ var MovieList = React.createClass({
 	        			<DropDownFilters />
 	        		</div>
 	        		<p>There are {this.state.data.length} array items.</p>
-	        		
-	        		<MovieOutput/>
+
+	        		<MovieOutput data={this.state.data}/>
 	        		
 	     		</div>
 	     </div>
@@ -219,7 +223,7 @@ var MovieList = React.createClass({
 
 // Render the actual component
 ReactDOM.render(
-    <MovieList url='../src/js/data/data.json'/>,
+    <MovieList url='../src/js/data/data.json' />,
     document.getElementById('filterable-content')
  );
 
