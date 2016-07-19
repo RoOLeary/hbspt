@@ -54,7 +54,7 @@ body, p {
     #section-testimonial div span {
       padding-left: 1em; }
     #section-testimonial div .testimonial-actual {
-      font-family: Montserrat, sans-serif;
+      font-family: Roboto, sans-serif;
       padding: 0 0 1em 1em; }
       #section-testimonial div .testimonial-actual:before {
         content: '\“';
@@ -64,7 +64,7 @@ body, p {
         height: 17px;
         position: absolute;
         left: -11px;
-        padding: 0 6px 5px 4px;
+        padding: 0 6px 5px 5px;
         border-radius: 16px;
         font-size: 33px;
         top: -24px; }
