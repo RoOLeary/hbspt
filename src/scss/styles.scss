@@ -180,9 +180,14 @@ body, p{
 }
 
 
-
 ul{
-	flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0 auto!important;
+    background: #e5e5e5;
+    width: 100%;
+    height: auto;
+    overflow: auto;
+
 	li{
 		display: flex;
     	flex-wrap: wrap;

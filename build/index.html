@@ -42,8 +42,7 @@
 <script type="text/babel">
 
 // Component to render the clear filters field
-// To DO: clear fields on click, maybe refresh page. 
-
+// To DO: clear fields on click,
 var ClearFilter = React.createClass({
 	render: function(){
 		return(
@@ -59,13 +58,23 @@ var ClearFilter = React.createClass({
 var CheckBoxes = React.createClass({
 
 	mvisChange: function(){
-		console.log('mvis checkbox has been ticked');
-		// To Do: add the filter/change events. Waaaay ahead of that though. 
+
+		console.log('book checkbox has been ticked');
+		this.props.data.sort(function(a, b) {
+            if(a.type < b.type) {
+                return -1;
+            } else if(a.type > b.type) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
 	},
 
 	booksChange: function(){
 		console.log('book checkbox has been ticked');
 		// To Do: add the filter/change events. Waaaay ahead of that though. 
+		// mar thuas. 
 	},
 
 	render: function(){
@@ -159,19 +168,19 @@ var DropDownFilters = React.createClass({
 // Right, on to the actual element. So we're going to render the movies into the ul and then once (read as - if) there's some output we'll wire it up. 
 
 var MovieItem = React.createClass({
-
-	linkOnClick: function(){
-		// ToDo: Something useful. 
-		console.log(this.props.data); 
-	}, 
-
+	
+	
 	render: function(){
+		
 		var movieItems = this.props.data.map(function (data) {
+			
+			// Run a join method on the genre. Was ouputting with comma separation
+			var genre = data.genre.join();
             return (
-                <li>
+                <li key={data.title}>
 	            	<img src={data.poster} />
 					<p>{data.title} ({data.year})</p>
-					<p>Genre: {data.genre}</p>
+					<p>Genre: {genre}</p>
 				</li>
             );
         });
@@ -210,9 +219,22 @@ var MovieList = React.createClass({
 	      url: this.props.url,
 	      dataType: 'json',
 	      success: function(data) {
-	        this.setState({data: data.media});
-	      	console.log(this.state.data);	        
-	        // grand - is logging the object, seems to be correct. Fire ahead so... 
+
+	      	// set up default sorting on output 
+	      	data.media.sort(function(a, b) {
+                if(a.title < b.title) {
+                    return -1;
+                } else if(a.title > b.title) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            });
+
+	      	// now that's done, set state. 
+
+	        this.setState({data: data.media});  	
+	        // grand - is logging the bject, seems to be correct. Fire ahead so... 
 	      }.bind(this),
 	      error: function(xhr, status, err) {
 	        console.error(this.props.url, status, err.toString());
